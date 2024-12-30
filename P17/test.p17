@@ -1,0 +1,24 @@
+STARTPROGRAM
+STARTBLOCK
+VARIABLE    INT16   _a, _b, _x, _y;
+
+
+INPUT   _a;
+INPUT   _b;
+
+
+OUTPUT  _a + _b;
+OUTPUT  _a - _b;
+OUTPUT  _a * _b;
+OUTPUT  _a DIV _b;
+OUTPUT  _a MOD _b;
+
+
+(_a - _b) * 10 + (_a + _b) DIV 10 ==> _x;
+_x + _x MOD 10 ==> _y;
+
+
+OUTPUT _x;
+OUTPUT _y;
+
+ENDBLOCK

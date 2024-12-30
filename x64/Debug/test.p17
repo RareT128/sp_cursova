@@ -1,0 +1,37 @@
+STARTPROGRAM
+STARTBLOCK VARIABLE INT16 _suka, _Wind, _WIND, _Hia, _wind, _h, _huy, _x, _y;
+_Start:;
+
+INPUT _Wind;
+OUTPUT _WIND;
+OUTPUT _Wind + _Hia;
+
+1 ==> _suka;##Windows huynya
+
+IF (_wind = _h)
+_wind ==> _h;
+
+IF (_wind = _h && _wind >> _huy)
+_wind * _wind + _wind ==> _h;
+ELSE
+STARTBLOCK
+_wind * _wind + _wind ==> _h;
+OUTPUT _h;
+ENDBLOCK;
+
+GOTO _Start;
+
+FOR 10 ==> _x TO 11 DO OUTPUT _x;
+FOR 10 ==> _y DOWNTO 0 DO OUTPUT _y;
+
+WHILE _x << 10 
+	_x + 1 ==> _x;
+	OUTPUT _x;
+WEND;
+
+REPEAT
+	_x + 1 ==> _x;
+	OUTPUT _x;	
+UNTIL (_x != 100 || 100 != _x);
+
+ENDBLOCK 
