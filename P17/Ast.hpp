@@ -13,7 +13,7 @@ extern int pos;
 namespace AST {
     //  program :: = "STARTPROGRAM", "STARTBLOCK", { "VARIABLE", variable_declaration, ";" }, { statement, ";" }, "ENDBLOCK";
     struct astNode*  program();
-    //  programBody ::= { statement, ";" };
+    //  programBody ::= { statement };
     struct astNode*  programBody();
     //  variable_declaration ::= "INT16", variable_list;
     struct astNode*  variableDeclaration();
@@ -70,15 +70,16 @@ namespace AST {
     struct astNode*  labelPoint();
     //  for_to_statement :: = "FOR", assign_statement, "TO" | "DOWNTO", arithmetic_expression, "DO", statement;
     struct astNode*  forStatement();
-    //  while_statement :: = "WHILE", logical_expression, While_body, "WEND";
+    //  while_statement :: = "WHILE", logical_expression, { statement_in_while }, "END";
     struct astNode*  whileStatement();
-    //  While_body :: = { statement, ";" };
+    //  statement_in_while :: = statement | "CONTINUE WHILE" | "EXIT WHILE";
+    struct astNode*  statementInWhile();
     struct astNode*  whileBody();
     //  repeat_until_statement :: = "REPEAT", repeat_body, "UNTIL", "(", logical_expression, ")";
     struct astNode*  repeatStatement();
     //  repeat_body :: = { statement, ";" };
 	struct astNode*  repeatBody();
-    //  compoundStatement :: = "STARTBLOCK", { statement, ";" }, "ENDBLOCK";
+    //  compoundStatement :: = "STARTBLOCK", { statement }, "ENDBLOCK";
     struct astNode*  compoundStatement();
 
     void deleteNode(struct astNode* node);

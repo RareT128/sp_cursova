@@ -17,7 +17,7 @@ const char* lexemeTypeName(enum TypeOfToken type) {
     case Downto:        return "Downto";
     case Do:            return "Do";
     case While:         return "While";
-    case WEnd:          return "WEnd";
+    case End:          return "WEnd";
     case Repeat:        return "Repeat";
     case Until:         return "Until";
     case Identifier:    return "Identifier";

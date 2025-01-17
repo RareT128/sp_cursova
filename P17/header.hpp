@@ -19,7 +19,9 @@ enum TypeOfToken {
     Downto,         // DOWNTO
     Do,             // DO
     While,          // WHILE
-    WEnd,           // WEND
+    Continue,
+    Exit,
+    End,           // WEND
     Repeat,         // REPEAT
     Until,          // UNTIL
 
@@ -105,6 +107,8 @@ enum TypeOfNode {
     to_node,
     downto_node,
     while_node,
+    continue_node,
+    exit_node,
     repeat_node,
     compound_node
 };

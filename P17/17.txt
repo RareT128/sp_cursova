@@ -1,7 +1,7 @@
 program ::= "STARTPROGRAM", "STARTBLOCK", {"VARIABLE", variable_declaration, ";"}, {statement, ";"}, "ENDBLOCK";
 variable_declaration ::= "INT16", variable_list;
 variable_list ::= identifier, {",", identifier};
-identifier ::= "_", up_low{5};
+identifier ::= "_", up, low, low, low, low;
 up_low ::= up | low | digit;
 up ::= "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z";
 low ::= a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z" ;
@@ -14,7 +14,7 @@ low_priority_operator ::= "+" | "-";
 low_priority_expression ::= middle_priority_expression {middle_priority_operator, middle_priority_expression};
 middle_priority_operator ::= "*" | "DIV" | "MOD";
 middle_priority_expression ::= identifier | number | "(", arithmetic_expression, ")";
-number ::= ["-"], digit {5};
+number ::= ["-"], d;
 assign_statement ::= arithmetic_expression, "==>", identifier;
 if_else_statement ::= "IF", "(", logical_expression, ")", statement, [";", "ELSE", statement];
 logical_expression ::= and_expression {or_operator, and_expression};

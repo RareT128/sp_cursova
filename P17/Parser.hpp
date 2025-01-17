@@ -53,7 +53,7 @@ namespace Parser {
 
     //  assign_statement :: = arithmetic_expression, "==>", identifier;
     void assignStatement();
-    //  if_else_statement :: = "IF", "(", logical_expression, ")", statement, [";", "ELSE", statement];
+    //  if_else_statement :: = "IF", "(", logical_expression, ")", statement, [ "ELSE", statement];
     void ifStatement();
     //  logical_expression :: = and_expression{ or_operator, and_expression };
     void logicalExpression();
@@ -84,8 +84,10 @@ namespace Parser {
     void labelPoint();
     //  for_to_statement :: = "FOR", assign_statement, "TO" | "DOWNTO", arithmetic_expression, "DO", statement;
     void forStatement();
-    //  while_statement :: = "WHILE", logical_expression, { statement, ";" }, "WEND";
+    //  while_statement :: = "WHILE", logical_expression, { statement_in_while, ";" }, "END";
     void whileStatement();
+    //  statement_in_while :: = statement | "CONTINUE WHILE" | "EXIT WHILE";
+    void statementInWhile();
     //  repeat_until_statement :: = "REPEAT", { statement, ";" }, "UNTIL", "(", logical_expression, ")";
     void repeatStatement();
     //  compoundStatement :: = "STARTBLOCK", { statement, ";" }, "ENDBLOCK";

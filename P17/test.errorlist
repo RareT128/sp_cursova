@@ -3,10 +3,13 @@ The program is syntax correct.
 
 The program is semantic correct.
 
-0 labels found
+1 labels found
+_Ivann
 
-4 identifiers found
-_a
-_b
-_x
-_y
+6 identifiers found
+_Value
+_Devid
+_Remad
+_Cycac
+_Cycbc
+_Cyccc

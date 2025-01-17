@@ -231,6 +231,16 @@ namespace Codegen {
 			fprintf(outFile, "}\n");
             break;
         }
+        
+        case continue_node: {
+            fprintf(outFile, "continue;\n");
+            break;
+        }
+
+        case exit_node: {
+            fprintf(outFile, "break;\n");
+            break;
+        }
 
         case repeat_node: {
             fprintf(outFile, "do {\n");

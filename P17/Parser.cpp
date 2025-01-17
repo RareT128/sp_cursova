@@ -219,8 +219,8 @@ namespace Parser {
         logicalExpression();
         match(RBracket);
         statement();
-        if (TokenTable[pos + 1].type == Else) {
-            match(Semicolon);
+        if (TokenTable[pos].type == Else) {
+            //match(Semicolon);
             ++pos;  //  for else
             statement();
         }
@@ -305,19 +305,38 @@ namespace Parser {
     void whileStatement() {
         match(While);
         logicalExpression();
-        while (TokenTable[pos].type != WEnd) {
-            statement();
-            match(Semicolon);
+        while (TokenTable[pos].type != End) {
+            statementInWhile();
+            //match(Semicolon);
         }
         //match(WEnd);
         ++pos;  //  for WEND
+    }
+
+    void statementInWhile() {
+        switch (TokenTable[pos].type) {
+        case Continue: {
+            ++pos;  //  for CONTINUE
+            match(While);
+            break;
+        }
+        case Exit: {
+            ++pos;  //  for EXIT
+            match(While);
+            break;
+        }
+        default: {
+            statement();
+            break;
+        }
+        }
     }
 
     void repeatStatement() {
         match(Repeat);
         while (TokenTable[pos].type != Until) {
             statement();
-            match(Semicolon);
+            //match(Semicolon);
         }
         //match(Until);
         ++pos;  //  for UNTIL
@@ -335,7 +354,7 @@ namespace Parser {
     void programBody() {
         while (TokenTable[pos].type != EndBlock) {
             statement();
-            match(Semicolon);
+            //match(Semicolon);
         }
     }
 

@@ -108,12 +108,12 @@ namespace AST {
     struct astNode* programBody() {
         if (TokenTable[pos].type != EndBlock) {
             struct astNode* stmt = statement();
-            match(Semicolon);
+            //match(Semicolon);
             struct astNode* body = stmt;
             while (TokenTable[pos].type != EndBlock)
             {
                 struct astNode* nextStmt = statement();
-                match(Semicolon);
+                //match(Semicolon);
                 body = createNode(statement_node, "statement", body, nextStmt);
             }
             return body;
@@ -203,8 +203,8 @@ namespace AST {
         struct astNode* expr = logicalExpression();
         match(RBracket);
         struct astNode* stmt = statement();
-        if (TokenTable[pos + 1].type == Else) {
-            match(Semicolon);
+        if (TokenTable[pos].type == Else) {
+            //match(Semicolon);
             ++pos;  //  for ELSE
 			struct astNode* elseStmt = statement();
             stmt = createNode(else_node, "else", stmt, elseStmt);
@@ -312,24 +312,40 @@ namespace AST {
         match(While);
         struct astNode* expr = logicalExpression();
 		struct astNode* body = whileBody();
-        match(WEnd);
+        match(End);
         return createNode(while_node, "while", expr, body);
     }
 
     struct astNode* whileBody() {
-        if (TokenTable[pos].type != WEnd) {
-            struct astNode* stmt = statement();
-            match(Semicolon);
+        if (TokenTable[pos].type !=End) {
+            struct astNode* stmt = statementInWhile();
+            //match(Semicolon);
             struct astNode* body = stmt;
-            while (TokenTable[pos].type != WEnd)
+            while (TokenTable[pos].type != End)
             {
-                struct astNode* nextStmt = statement();
-                match(Semicolon);
+                struct astNode* nextStmt = statementInWhile();
+                //match(Semicolon);
                 body = createNode(statement_node, "statement", body, nextStmt);
             }
             return body;
         }
         return nullptr;
+    }
+
+    struct astNode* statementInWhile() {
+        switch (TokenTable[pos].type) {
+        case Continue: {
+            ++pos;  //  for CONTINUE
+            match(While);
+            return createNode(continue_node, "continue", nullptr, nullptr);
+        }
+        case Exit: {
+            ++pos;  //  for EXIT
+            match(While);
+            return createNode(exit_node, "exit", nullptr, nullptr);
+        }
+        default:    return statement();
+        }
     }
 
     struct astNode* repeatStatement() {
@@ -345,12 +361,12 @@ namespace AST {
     struct astNode* repeatBody() {
         if (TokenTable[pos].type != Until) {
             struct astNode* stmt = statement();
-            match(Semicolon);
+            //match(Semicolon);
             struct astNode* body = stmt;
             while (TokenTable[pos].type != Until)
             {
                 struct astNode* nextStmt = statement();
-                match(Semicolon);
+                //match(Semicolon);
                 body = createNode(statement_node, "statement", body, nextStmt);
             }
             return body;

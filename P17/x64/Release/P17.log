@@ -7,6 +7,6 @@ C:\Users\Vasyan\Desktop\P17\P17\P17\LexicAnalyzer.cpp(94,39): warning C4244: '='
   Parser.cpp
   Generating code
   Previous IPDB was built with incompatible compiler, fall back to full compilation.
-  All 76 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  All 78 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Finished generating code
   P17.vcxproj -> C:\Users\Vasyan\Desktop\P17\P17\x64\Release\P17.exe

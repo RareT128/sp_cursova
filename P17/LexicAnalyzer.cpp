@@ -96,7 +96,15 @@ unsigned int LexicAnalyzer::getTokens(FILE* F) {
                 state = Finish;
                 break;
             }
-
+            
+            if ((buf[0] == '0' && buf[1] != '\0') || (buf[0] == '-' && buf[1] == '0')) {
+                strcpy_s(tempToken.name, buf);
+                tempToken.type = Unknown_;
+                tempToken.value = 0;
+                tempToken.line = line;
+                state = Finish;
+                break;
+            }
             strcpy_s(tempToken.name, buf);
             tempToken.type = Number;
             tempToken.value = atoi(buf);
@@ -224,8 +232,14 @@ unsigned int LexicAnalyzer::getTokens(FILE* F) {
             else if (!strcmp(buf, "WHILE")) {
                 tempType = While;
             }
-            else if (!strcmp(buf, "WEND")) {
-                tempType = WEnd;
+            else if (!strcmp(buf, "END")) {
+                tempType = End;
+            }
+            else if (!strcmp(buf, "CONTINUE")) {
+                tempType = Continue;
+            }
+            else if (!strcmp(buf, "EXIT")) {
+                tempType = Exit;
             }
             else if (!strcmp(buf, "REPEAT")) {
                 tempType = Repeat;
@@ -239,7 +253,13 @@ unsigned int LexicAnalyzer::getTokens(FILE* F) {
             else if (!strcmp(buf, "MOD")) {
                 tempType = Mod;
             }
-            else if (strlen(buf) <= 6 && buf[0] == '_') {
+            else if (strlen(buf) <= 6 && buf[0] == '_' 
+                && ('A' <= buf[1] && buf[1] <= 'Z')
+                && ('a' <= buf[2] && buf[2] <= 'z')
+                && ('a' <= buf[3] && buf[3] <= 'z')
+                && ('a' <= buf[4] && buf[4] <= 'z')
+                && ('a' <= buf[5] && buf[5] <= 'z')
+                ) {
                 tempType = Identifier;
             }
 
